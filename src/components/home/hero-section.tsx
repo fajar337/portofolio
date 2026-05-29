@@ -70,6 +70,29 @@ export function HeroSection() {
         <FloatingBadge label="MySQL" color="emerald" position={{ top: "35%", right: "5%" }} speed={0.45} rotate={3} delay={0.75} side="right" />
       </div>
 
+      {/* Lightweight mobile scene to keep the same visual language without loading Three.js. */}
+      <div className="lg:hidden">
+        <FloatingBadge label="Laravel" color="pink" position={{ top: "16%", left: "5%" }} speed={0.25} rotate={7} delay={0} side="left" />
+        <FloatingBadge label="React" color="cyan" position={{ top: "19%", right: "4%" }} speed={0.22} rotate={5} delay={0.15} side="right" />
+        <FloatingBadge label="PHP" color="violet" position={{ bottom: "22%", left: "6%" }} speed={0.28} rotate={6} delay={0.3} side="left" />
+        <FloatingBadge label="MySQL" color="emerald" position={{ bottom: "27%", right: "5%" }} speed={0.24} rotate={4} delay={0.45} side="right" />
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
+          className="pointer-events-none absolute left-[-72px] top-[30%] h-44 w-44 rounded-full border border-violet-500/15"
+        />
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{ duration: 38, repeat: Infinity, ease: "linear" }}
+          className="pointer-events-none absolute right-[-86px] top-[48%] h-52 w-52 rounded-full border border-cyan-500/15"
+        />
+        <motion.div
+          animate={{ y: [0, -12, 0], rotate: [12, 26, 12] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          className="pointer-events-none absolute bottom-[18%] left-[18%] h-20 w-20 border border-violet-400/15"
+        />
+      </div>
+
       {/* Floating glowing dots */}
       <FloatingDot position={{ top: "20%", left: "20%" }} color="rgba(139,92,246,0.6)" size={6} speed={0.6} />
       <FloatingDot position={{ top: "60%", right: "15%" }} color="rgba(6,182,212,0.6)" size={8} speed={0.4} />
