@@ -1,0 +1,65 @@
+---
+title: "Membangun Portfolio Website dengan Next.js & Tailwind CSS"
+description: "Pengalaman saya membangun website portfolio modern menggunakan Next.js, Tailwind CSS, Framer Motion, dan React Three Fiber."
+date: "2024-12-15"
+tags: ["Next.js", "React", "Tailwind CSS", "Tutorial"]
+---
+
+## Kenapa Next.js?
+
+Next.js adalah framework React yang memberikan banyak fitur out-of-the-box seperti **Server-Side Rendering (SSR)**, **Static Site Generation (SSG)**, dan **App Router** yang memudahkan routing.
+
+Untuk portfolio website, Next.js sangat cocok karena:
+
+- **SEO friendly** — halaman di-render di server
+- **Fast** — static pages di-cache di CDN
+- **Developer experience** — hot reload, TypeScript support
+- **Flexible** — bisa mix static dan dynamic pages
+
+## Tech Stack yang Digunakan
+
+| Technology | Purpose |
+|-----------|---------|
+| Next.js 14 | Framework |
+| Tailwind CSS v4 | Styling |
+| Framer Motion | Animations |
+| React Three Fiber | 3D Graphics |
+| MDX | Blog Content |
+| GitHub API | Dashboard |
+
+## Setup Awal
+
+Untuk memulai project, jalankan:
+
+```bash
+npx create-next-app@latest portfolio --typescript --tailwind --app
+```
+
+Lalu install dependencies tambahan:
+
+```bash
+npm install framer-motion lenis lucide-react
+```
+
+## Dark Theme
+
+Portfolio ini menggunakan dark theme sebagai default. Konfigurasi warna dilakukan di `globals.css` menggunakan CSS custom properties:
+
+```css
+:root {
+  --background: #050505;
+  --foreground: #ededed;
+  --accent: #8b5cf6;
+  --accent-secondary: #06b6d4;
+}
+```
+
+## Fitur Favorit: GitHub Dashboard
+
+Fitur yang paling saya sukai adalah **GitHub Dashboard** yang menampilkan statistik real-time dari akun GitHub saya. Data diambil menggunakan GitHub REST API dan GraphQL API, lalu di-cache menggunakan ISR (Incremental Static Regeneration).
+
+> Dengan ISR, data hanya di-fetch ulang setiap 1 jam, sehingga tidak membebani rate limit GitHub API.
+
+## Kesimpulan
+
+Membangun portfolio website adalah cara terbaik untuk belajar teknologi baru. Dengan Next.js dan ekosistemnya, kita bisa membuat website yang cepat, SEO-friendly, dan visually appealing.

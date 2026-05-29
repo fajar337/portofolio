@@ -12,18 +12,20 @@ export interface ExperienceItem {
 
 export const experiences: ExperienceItem[] = [
   {
-    id: "edu-1",
+    id: "edu-smk",
     type: "education",
-    title: "Computer Science",
-    organization: "University",
-    location: "Indonesia",
-    startDate: "2020",
-    endDate: "2024",
+    title: "Rekayasa Perangkat Lunak (RPL)",
+    organization: "SMKN 2 Kota Bekasi",
+    location: "Bekasi, Indonesia",
+    startDate: "2023",
+    endDate: "2026",
     description: [
-      "Studied computer science fundamentals",
-      "Focused on web development and software engineering",
-      "Completed various projects in Laravel, Java, and JavaScript",
+      "Mempelajari dasar-dasar pemrograman dan pengembangan perangkat lunak",
+      "Fokus pada web development dengan PHP, Laravel, dan JavaScript",
+      "Mengembangkan berbagai project aplikasi web dan desktop",
+      "Mempelajari database management dengan MySQL",
+      "Membuat project monitoring system, marketplace, dan aplikasi berbasis Java",
     ],
-    skills: ["Java", "PHP", "Laravel", "JavaScript", "MySQL"],
+    skills: ["PHP", "Laravel", "Java", "JavaScript", "MySQL", "HTML", "CSS", "Git"],
   },
 ];

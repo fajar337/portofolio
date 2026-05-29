@@ -1,0 +1,49 @@
+---
+title: "Membangun Website Dufan dengan Laravel & Blade"
+description: "Pengalaman saya membuat website informasi Dunia Fantasi menggunakan framework Laravel dengan Blade templating engine."
+date: "2024-10-20"
+tags: ["Laravel", "PHP", "Blade", "MySQL"]
+---
+
+## Tentang Project
+
+Website Dufan adalah salah satu project pertama saya yang menggunakan **Laravel** secara penuh. Project ini bertujuan untuk membuat website informasi tentang Dunia Fantasi, lengkap dengan fitur daftar wahana dan pembelian tiket.
+
+## Tech Stack
+
+- **Laravel** — PHP framework untuk backend
+- **Blade** — Template engine bawaan Laravel
+- **MySQL** — Database untuk menyimpan data wahana dan tiket
+- **Bootstrap** — CSS framework untuk responsive design
+
+## Fitur Utama
+
+1. **Halaman informasi wahana** — Menampilkan semua wahana yang tersedia
+2. **Sistem tiket** — Pembelian tiket online
+3. **Galeri foto** — Menampilkan foto-foto wahana
+4. **Admin panel** — CRUD data wahana dan tiket
+
+## Apa yang Saya Pelajari
+
+Project ini mengajarkan saya banyak hal tentang:
+
+- **MVC Pattern** — Memisahkan logic, view, dan data
+- **Eloquent ORM** — Query database tanpa raw SQL
+- **Blade Components** — Membuat template yang reusable
+- **Migration & Seeder** — Manage database schema dengan code
+
+## Code Snippet
+
+Contoh controller untuk menampilkan daftar wahana:
+
+```php
+public function index()
+{
+    $wahana = Wahana::all();
+    return view('wahana.index', compact('wahana'));
+}
+```
+
+> Laravel membuat development PHP terasa jauh lebih modern dan terstruktur dibanding PHP native.
+
+Cek source code di [GitHub](https://github.com/fajar337/Website-Dufan).

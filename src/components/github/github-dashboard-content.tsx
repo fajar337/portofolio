@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { ParallaxDecoration } from "@/components/ui/parallax-decoration";
 import { StatsCards } from "./stats-cards";
 import { ContributionGraph } from "./contribution-graph";
 import { ActivityFeed } from "./activity-feed";
@@ -57,7 +58,8 @@ export function GitHubDashboardContent({
   if (!stats) return <NoDataFallback />;
 
   return (
-    <div className="px-6 py-24">
+    <div className="relative px-6 py-24">
+      <ParallaxDecoration />
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           title="GitHub Dashboard"

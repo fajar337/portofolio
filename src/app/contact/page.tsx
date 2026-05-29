@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactContent />;
+  return <ContactContent accessKey={process.env.WEB3FORMS_ACCESS_KEY} />;
 }

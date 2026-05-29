@@ -1,11 +1,13 @@
 export const siteConfig = {
-  name: "Fajar",
-  title: "Fajar — Web Developer",
+  name: "Fajar Mustofa",
+  shortName: "Fajar",
+  title: "Fajar Mustofa — Web Developer",
   description:
-    "Portfolio website of Fajar, a passionate web developer specializing in Laravel, React, and modern web technologies.",
+    "Portfolio website of Fajar Mustofa, a fresh graduate web developer from Bekasi specializing in Laravel, React, and modern web technologies.",
   url: "https://fajar.dev",
   github: "https://github.com/fajar337",
   githubUsername: "fajar337",
+  location: "Bekasi, Indonesia",
 };
 
 export const navLinks = [
@@ -25,8 +27,18 @@ export const socialLinks = [
     icon: "github" as const,
   },
   {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/fajarmustofa/",
+    icon: "linkedin" as const,
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/fjr.muustafa/",
+    icon: "instagram" as const,
+  },
+  {
     label: "Email",
-    href: "mailto:claudeai2@saan.web.id",
+    href: "mailto:mustofafajar733@gmail.com",
     icon: "mail" as const,
   },
 ] as const;

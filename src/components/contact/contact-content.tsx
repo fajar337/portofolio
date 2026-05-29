@@ -5,10 +5,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Send, Mail } from "lucide-react";
-import { GithubIcon } from "@/components/ui/icons";
+import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/ui/icons";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { siteConfig, socialLinks } from "@/lib/constants";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
+
+const WEB3FORMS_API_URL = "https://api.web3forms.com/submit";
 
 const schema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -18,10 +20,21 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
+type ContactResponse = {
+  error?: string;
+  detail?: string;
+};
 
-const iconMap = { github: GithubIcon, mail: Mail };
+const iconMap = { github: GithubIcon, linkedin: LinkedinIcon, instagram: InstagramIcon, mail: Mail };
+const contactEmail =
+  socialLinks.find((link) => link.icon === "mail")?.href.replace("mailto:", "") ??
+  "mustofafajar733@gmail.com";
 
-export function ContactContent() {
+type ContactContentProps = {
+  accessKey?: string;
+};
+
+export function ContactContent({ accessKey }: ContactContentProps) {
   const {
     register,
     handleSubmit,
@@ -31,21 +44,58 @@ export function ContactContent() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const res = await fetch("/api/contact", {
+      if (!accessKey) {
+        const mailtoUrl = new URL(`mailto:${contactEmail}`);
+        mailtoUrl.searchParams.set("subject", data.subject);
+        mailtoUrl.searchParams.set(
+          "body",
+          `Name: ${data.name}\nEmail: ${data.email}\n\n${data.message}`
+        );
+        window.open(mailtoUrl.toString(), "_self");
+        toast("Web3Forms belum dikonfigurasi. Membuka email app sebagai fallback.");
+        return;
+      }
+
+      const res = await fetch(WEB3FORMS_API_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: data.name,
+          email: data.email,
+          subject: `Portfolio Contact: ${data.subject}`,
+          message: data.message,
+          from_name: "Portfolio Contact Form",
+          botcheck: "",
+        }),
       });
-      if (!res.ok) throw new Error();
+
+      if (!res.ok) {
+        const result = (await res.json().catch(() => ({}))) as ContactResponse;
+        throw new Error(result.detail ?? result.error ?? "Failed to send message.");
+      }
       toast.success("Message sent! I'll get back to you soon.");
       reset();
-    } catch {
-      toast.error("Failed to send message. Please try again.");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to send message. Please try again.");
     }
   };
 
   return (
     <div className="px-6 py-24">
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          style: {
+            background: "#111",
+            color: "#ededed",
+            border: "1px solid #222",
+          },
+        }}
+      />
       <div className="mx-auto max-w-3xl">
         <SectionHeading
           title="Contact"
@@ -139,7 +189,11 @@ export function ContactContent() {
                       <Icon className="h-4 w-4" />
                       {link.label === "GitHub"
                         ? siteConfig.githubUsername
-                        : link.href.replace("mailto:", "")}
+                        : link.label === "LinkedIn"
+                          ? "fajarmustofa"
+                          : link.label === "Instagram"
+                            ? "@fjr.muustafa"
+                            : link.href.replace("mailto:", "")}
                     </a>
                   );
                 })}
@@ -150,7 +204,7 @@ export function ContactContent() {
               <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent">
                 Location
               </h3>
-              <p className="text-sm text-muted">Indonesia</p>
+              <p className="text-sm text-muted">Bekasi, Indonesia</p>
             </div>
           </motion.div>
         </div>

@@ -1,24 +1,46 @@
 "use client";
 
 import { useEffect } from "react";
-import Lenis from "lenis";
 
-export function SmoothScroll({ children }: { children: React.ReactNode }) {
+export function SmoothScroll() {
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      touchMultiplier: 2,
-    });
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let frame = 0;
+    let destroyed = false;
+    let lenis: { raf: (time: number) => void; destroy: () => void } | null = null;
+
+    const start = async () => {
+      if (destroyed || lenis) return;
+      const { default: Lenis } = await import("lenis");
+      if (destroyed || lenis) return;
+
+      lenis = new Lenis({
+        duration: 1.2,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        touchMultiplier: 2,
+      });
+
+      frame = requestAnimationFrame(raf);
+    };
 
     function raf(time: number) {
+      if (!lenis) return;
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      frame = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
 
-    return () => lenis.destroy();
+    const idleCallback = window.requestIdleCallback?.(start, { timeout: 1200 });
+    const timeout = window.setTimeout(start, 1600);
+
+    return () => {
+      destroyed = true;
+      if (idleCallback) window.cancelIdleCallback?.(idleCallback);
+      window.clearTimeout(timeout);
+      if (frame) cancelAnimationFrame(frame);
+      lenis?.destroy();
+    };
   }, []);
 
-  return <>{children}</>;
+  return null;
 }

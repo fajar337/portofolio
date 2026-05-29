@@ -2,10 +2,13 @@
 
 import { motion } from "framer-motion";
 import { Briefcase, GraduationCap } from "lucide-react";
+import { useParallax } from "@/hooks/use-parallax";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { experiences } from "@/data/experience";
 
 export function ExperienceContent() {
+  const { ref: timelineRef, y: timelineY } = useParallax(0.1);
+
   return (
     <div className="px-6 py-24">
       <div className="mx-auto max-w-3xl">
@@ -14,7 +17,7 @@ export function ExperienceContent() {
           subtitle="My professional journey and education"
         />
 
-        <div className="relative">
+        <motion.div ref={timelineRef} style={{ y: timelineY }} className="relative">
           {/* Timeline line */}
           <div className="absolute left-6 top-0 h-full w-px bg-border md:left-1/2" />
 
@@ -82,7 +85,7 @@ export function ExperienceContent() {
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

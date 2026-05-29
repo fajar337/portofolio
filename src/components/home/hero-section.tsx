@@ -1,8 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, FileText } from "lucide-react";
 import { GithubIcon } from "@/components/ui/icons";
+import { FloatingBadge, FloatingDot } from "@/components/ui/floating-elements";
+import { CanvasWrapper } from "@/components/three/canvas-wrapper";
 import Link from "next/link";
 import { siteConfig } from "@/lib/constants";
 
@@ -20,33 +23,70 @@ const item = {
 };
 
 export function HeroSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const gridOpacity = useTransform(scrollYProgress, [0, 0.6], [0.03, 0]);
+
   return (
-    <section className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden px-6">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 -left-32 h-[500px] w-[500px] rounded-full bg-purple-600/10 blur-[120px] animate-pulse-glow" />
-        <div className="absolute top-1/3 -right-32 h-[400px] w-[400px] rounded-full bg-cyan-500/10 blur-[120px] animate-pulse-glow [animation-delay:1s]" />
-        <div className="absolute -bottom-32 left-1/3 h-[300px] w-[300px] rounded-full bg-violet-500/8 blur-[100px] animate-pulse-glow [animation-delay:2s]" />
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-[calc(100vh-4rem)] min-h-[calc(100svh-4rem)] items-center justify-center overflow-hidden px-6"
+    >
+      {/* 3D Scene - hidden on mobile */}
+      <div className="hidden md:block">
+        <CanvasWrapper />
       </div>
 
-      {/* Grid pattern overlay */}
-      <div
-        className="absolute inset-0 -z-10 opacity-[0.03]"
+      {/* Fallback gradient for mobile */}
+      <div className="absolute inset-0 -z-10 md:hidden">
+        <div className="absolute top-1/4 -left-32 h-[500px] w-[500px] rounded-full bg-purple-600/10 blur-[120px] animate-pulse-glow" />
+        <div className="absolute top-1/3 -right-32 h-[400px] w-[400px] rounded-full bg-cyan-500/10 blur-[120px] animate-pulse-glow [animation-delay:1s]" />
+      </div>
+
+      {/* Grid pattern */}
+      <motion.div
+        className="absolute inset-0 -z-10"
         style={{
+          opacity: gridOpacity,
           backgroundImage:
             "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
           backgroundSize: "60px 60px",
         }}
       />
 
+      {/* Floating badges - tech stack badges around hero */}
+      <div className="hidden lg:block">
+        <FloatingBadge label="Laravel" color="pink" position={{ top: "18%", left: "8%" }} speed={0.4} rotate={8} delay={0} side="left" />
+        <FloatingBadge label="React" color="cyan" position={{ top: "25%", right: "10%" }} speed={0.3} rotate={6} delay={0.15} side="right" />
+        <FloatingBadge label="PHP" color="violet" position={{ bottom: "30%", left: "5%" }} speed={0.5} rotate={5} delay={0.3} side="left" />
+        <FloatingBadge label="TypeScript" color="cyan" position={{ bottom: "25%", right: "7%" }} speed={0.35} rotate={4} delay={0.45} side="right" />
+        <FloatingBadge label="Java" color="amber" position={{ top: "40%", left: "12%" }} speed={0.25} rotate={6} delay={0.6} side="left" />
+        <FloatingBadge label="MySQL" color="emerald" position={{ top: "35%", right: "5%" }} speed={0.45} rotate={3} delay={0.75} side="right" />
+      </div>
+
+      {/* Floating glowing dots */}
+      <FloatingDot position={{ top: "20%", left: "20%" }} color="rgba(139,92,246,0.6)" size={6} speed={0.6} />
+      <FloatingDot position={{ top: "60%", right: "15%" }} color="rgba(6,182,212,0.6)" size={8} speed={0.4} />
+      <FloatingDot position={{ bottom: "25%", left: "30%" }} color="rgba(236,72,153,0.5)" size={5} speed={0.5} />
+      <FloatingDot position={{ top: "30%", right: "25%" }} color="rgba(139,92,246,0.4)" size={10} speed={0.3} />
+      <FloatingDot position={{ bottom: "40%", right: "35%" }} color="rgba(52,211,153,0.4)" size={7} speed={0.55} />
+
+      {/* Content */}
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
-        className="mx-auto max-w-4xl text-center"
+        style={{ y: textY, opacity: textOpacity }}
+        className="relative mx-auto max-w-4xl text-center"
       >
         {/* Badge */}
-        <motion.div variants={item} className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-white/[0.03] px-4 py-1.5 text-xs text-muted">
+        <motion.div variants={item} className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-white/[0.03] px-4 py-1.5 text-xs text-muted backdrop-blur-sm">
           <span className="inline-block h-2 w-2 rounded-full bg-emerald-400 animate-pulse-glow" />
           Available for work
         </motion.div>
@@ -65,11 +105,13 @@ export function HeroSection() {
           variants={item}
           className="mx-auto mt-6 max-w-xl text-lg text-muted sm:text-xl"
         >
-          A passionate{" "}
+          A{" "}
+          <span className="text-foreground font-medium">Fresh Graduate</span>{" "}
+          &amp;{" "}
           <span className="text-foreground font-medium">Web Developer</span>{" "}
-          crafting modern web experiences with{" "}
+          from Bekasi, building modern web apps with{" "}
           <span className="text-foreground font-medium">Laravel</span>,{" "}
-          <span className="text-foreground font-medium">React</span>, and{" "}
+          <span className="text-foreground font-medium">React</span>, &amp;{" "}
           <span className="text-foreground font-medium">Next.js</span>.
         </motion.p>
 
@@ -88,7 +130,7 @@ export function HeroSection() {
           </Link>
           <Link
             href="/github"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-white/[0.03] px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-white/[0.06]"
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-white/[0.03] px-6 py-3 text-sm font-medium text-foreground backdrop-blur-sm transition-colors hover:bg-white/[0.06]"
           >
             <GithubIcon className="h-4 w-4" />
             GitHub Dashboard
@@ -101,6 +143,7 @@ export function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
+        style={{ opacity: textOpacity }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <motion.div

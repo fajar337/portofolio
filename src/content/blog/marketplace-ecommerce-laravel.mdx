@@ -1,0 +1,77 @@
+---
+title: "Membangun Platform Marketplace dengan Laravel"
+description: "Proses pembuatan platform e-commerce marketplace dengan fitur manajemen produk, keranjang, dan transaksi."
+date: "2024-08-25"
+tags: ["Laravel", "PHP", "E-Commerce", "MySQL"]
+---
+
+## Tentang Project
+
+Marketplace adalah project e-commerce yang memungkinkan pengguna untuk menjual dan membeli produk secara online. Ini adalah project yang mengajarkan saya tentang flow transaksi dan manajemen data yang kompleks.
+
+## Fitur Utama
+
+### 1. Manajemen Produk
+Seller bisa menambah, edit, dan hapus produk mereka:
+
+```php
+public function store(Request $request)
+{
+    $validated = $request->validate([
+        'nama' => 'required|string|max:255',
+        'harga' => 'required|numeric|min:0',
+        'stok' => 'required|integer|min:0',
+        'deskripsi' => 'required|string',
+    ]);
+    
+    Produk::create($validated);
+    return redirect()->back()->with('success', 'Produk berhasil ditambahkan');
+}
+```
+
+### 2. Keranjang Belanja
+Sistem keranjang menggunakan session:
+
+```php
+public function addToCart($id)
+{
+    $produk = Produk::findOrFail($id);
+    $cart = session()->get('cart', []);
+    
+    if (isset($cart[$id])) {
+        $cart[$id]['quantity']++;
+    } else {
+        $cart[$id] = [
+            'nama' => $produk->nama,
+            'harga' => $produk->harga,
+            'quantity' => 1,
+        ];
+    }
+    
+    session()->put('cart', $cart);
+}
+```
+
+### 3. Proses Checkout
+Flow checkout dengan validasi stok dan kalkulasi total.
+
+### 4. Order Management
+Tracking status pesanan dari pending hingga selesai.
+
+## Database Relations
+
+Project ini mengajarkan saya tentang **relasi database** yang kompleks:
+
+- User `hasMany` Products (sebagai seller)
+- User `hasMany` Orders (sebagai buyer)
+- Order `belongsToMany` Products (melalui order_items)
+- Product `belongsTo` Category
+
+## Yang Saya Pelajari
+
+1. **Transaction handling** — Gunakan `DB::transaction()` untuk operasi yang melibatkan banyak tabel
+2. **Validation** — Selalu validasi input user
+3. **Eloquent Relations** — Relasi antar model yang powerful
+4. **Session management** — Untuk fitur keranjang belanja
+
+Source code di [GitHub](https://github.com/fajar337/Marketplace).

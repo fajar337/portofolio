@@ -1,0 +1,58 @@
+---
+title: "Membuat Sistem Monitoring Parkir dengan Java"
+description: "Bagaimana saya membangun aplikasi desktop monitoring parkir menggunakan Java untuk memantau kendaraan dan slot parkir."
+date: "2024-09-15"
+tags: ["Java", "Desktop App", "OOP"]
+---
+
+## Latar Belakang
+
+Sistem Monitoring Parkir adalah project Java yang saya buat untuk mengelola area parkir secara digital. Aplikasi ini memantau kendaraan masuk/keluar dan ketersediaan slot parkir.
+
+## Fitur
+
+- **Pencatatan kendaraan masuk & keluar** — Rekam plat nomor, waktu, dan jenis kendaraan
+- **Monitoring slot** — Tampilkan slot yang tersedia secara real-time
+- **Laporan** — Generate laporan harian dan bulanan
+- **Kalkulasi biaya** — Hitung biaya parkir otomatis
+
+## Konsep OOP yang Digunakan
+
+Project ini menerapkan prinsip **Object-Oriented Programming**:
+
+```java
+public class Kendaraan {
+    private String platNomor;
+    private String jenisKendaraan;
+    private LocalDateTime waktuMasuk;
+    
+    public long hitungDurasi() {
+        return ChronoUnit.HOURS.between(
+            waktuMasuk, LocalDateTime.now()
+        );
+    }
+}
+```
+
+### Inheritance
+
+```java
+public class Motor extends Kendaraan {
+    private static final int TARIF_PER_JAM = 2000;
+    
+    @Override
+    public long hitungBiaya() {
+        return hitungDurasi() * TARIF_PER_JAM;
+    }
+}
+```
+
+## Tantangan
+
+Tantangan terbesar adalah mengelola **state** dari banyak slot parkir secara bersamaan dan memastikan data konsisten saat ada kendaraan masuk dan keluar secara bersamaan.
+
+## Kesimpulan
+
+Java tetap menjadi bahasa yang sangat baik untuk aplikasi desktop yang membutuhkan logika bisnis yang kompleks. OOP di Java membantu mengorganisir code dengan sangat baik.
+
+Source code: [GitHub](https://github.com/fajar337/SystemMonitoringParkir)

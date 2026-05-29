@@ -1,0 +1,64 @@
+---
+title: "Membangun Sistem AMB Monitoring dengan Laravel"
+description: "Pengalaman membangun aplikasi web monitoring AMB dengan dashboard real-time menggunakan Laravel."
+date: "2024-11-10"
+tags: ["Laravel", "PHP", "Dashboard", "MySQL"]
+---
+
+## Overview
+
+AMB Monitoring adalah aplikasi web yang saya buat untuk memantau dan mengelola data AMB secara real-time. Project ini merupakan salah satu project Laravel yang paling kompleks yang pernah saya kerjakan.
+
+## Arsitektur
+
+Aplikasi ini menggunakan arsitektur **monolith** dengan Laravel:
+
+- **Backend**: Laravel 10 dengan Eloquent ORM
+- **Frontend**: Blade templates + JavaScript
+- **Database**: MySQL
+- **Authentication**: Laravel built-in auth
+
+## Fitur Dashboard
+
+Dashboard adalah jantung dari aplikasi ini:
+
+1. **Statistik real-time** — Menampilkan data terkini
+2. **Chart & grafik** — Visualisasi data dalam bentuk grafik
+3. **Tabel data** — Data terstruktur dengan fitur sorting dan filter
+4. **Export laporan** — Download laporan dalam format yang dibutuhkan
+
+## Database Design
+
+Saya belajar banyak tentang **database design** di project ini:
+
+```sql
+CREATE TABLE monitoring_data (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    kategori VARCHAR(50),
+    nilai DECIMAL(10,2),
+    tanggal DATE,
+    created_at TIMESTAMP
+);
+```
+
+## Middleware untuk Authorization
+
+Menggunakan middleware custom untuk mengatur akses:
+
+```php
+public function handle($request, Closure $next)
+{
+    if (!auth()->user()->isAdmin()) {
+        abort(403);
+    }
+    return $next($request);
+}
+```
+
+## Lessons Learned
+
+- **Database indexing** sangat penting untuk performa query pada data yang banyak
+- **Eager loading** (`with()`) mencegah N+1 query problem
+- **Cache** bisa sangat membantu mengurangi load database
+
+Project ini bisa dilihat di [GitHub](https://github.com/fajar337/amb-monitoring).
