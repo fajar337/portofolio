@@ -52,7 +52,7 @@ export function ContactContent({ accessKey }: ContactContentProps) {
           `Name: ${data.name}\nEmail: ${data.email}\n\n${data.message}`
         );
         window.open(mailtoUrl.toString(), "_self");
-        toast("Web3Forms belum dikonfigurasi. Membuka email app sebagai fallback.");
+        toast("Web3Forms is not configured. Opening your email app as a fallback.");
         return;
       }
 
@@ -114,6 +114,8 @@ export function ContactContent({ accessKey }: ContactContentProps) {
               <div>
                 <input
                   {...register("name")}
+                  suppressHydrationWarning
+                  autoComplete="name"
                   placeholder="Name"
                   className="w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted/60 transition-colors focus:border-accent focus:outline-none"
                 />
@@ -124,7 +126,9 @@ export function ContactContent({ accessKey }: ContactContentProps) {
               <div>
                 <input
                   {...register("email")}
+                  suppressHydrationWarning
                   type="email"
+                  autoComplete="email"
                   placeholder="Email"
                   className="w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted/60 transition-colors focus:border-accent focus:outline-none"
                 />
@@ -136,6 +140,8 @@ export function ContactContent({ accessKey }: ContactContentProps) {
             <div>
               <input
                 {...register("subject")}
+                suppressHydrationWarning
+                autoComplete="off"
                 placeholder="Subject"
                 className="w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted/60 transition-colors focus:border-accent focus:outline-none"
               />
@@ -146,6 +152,8 @@ export function ContactContent({ accessKey }: ContactContentProps) {
             <div>
               <textarea
                 {...register("message")}
+                suppressHydrationWarning
+                autoComplete="off"
                 rows={5}
                 placeholder="Your message..."
                 className="w-full resize-none rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted/60 transition-colors focus:border-accent focus:outline-none"
