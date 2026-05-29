@@ -48,6 +48,10 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  overflow-x: clip;
+}
+
 html.lenis,
 html.lenis body {
   height: auto;

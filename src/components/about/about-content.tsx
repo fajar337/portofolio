@@ -16,7 +16,7 @@ export function AboutContent() {
   const { ref: backdropRef, y: backdropY } = useParallaxRange([90, -90]);
 
   return (
-    <div className="relative isolate overflow-hidden px-6 py-24">
+    <div className="relative isolate overflow-hidden px-5 py-20 sm:px-6 sm:py-24">
       {/* Background decorations */}
       <ParallaxDecoration />
       <FloatingDot position={{ top: "15%", right: "20%" }} color="rgba(139,92,246,0.5)" size={8} speed={0.4} />
@@ -34,33 +34,33 @@ export function AboutContent() {
         <motion.div
           ref={backdropRef}
           style={{ y: backdropY }}
-          className="pointer-events-none absolute left-1/2 top-8 -z-10 h-[430px] w-[min(780px,calc(100vw-2rem))] -translate-x-1/2"
+          className="pointer-events-none absolute left-1/2 top-10 -z-10 h-[360px] w-[min(560px,calc(100vw-1.5rem))] -translate-x-1/2 sm:top-8 sm:h-[430px] sm:w-[min(780px,calc(100vw-2rem))]"
         >
           <motion.div
             animate={{ scale: [1, 1.06, 1], opacity: [0.55, 0.85, 0.55] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-x-8 top-4 h-56 rounded-full border border-violet-500/10 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.12),transparent_62%)] blur-[1px]"
+            className="absolute inset-x-2 top-2 h-52 rounded-full border border-violet-500/10 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.14),transparent_62%)] blur-[1px] sm:inset-x-8 sm:top-4 sm:h-56"
           />
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
-            className="absolute left-1/2 top-28 h-64 w-64 -translate-x-1/2 rounded-full border border-dashed border-cyan-400/15 shadow-[0_0_80px_rgba(6,182,212,0.08)]"
+            className="absolute left-1/2 top-24 h-56 w-56 -translate-x-1/2 rounded-full border border-dashed border-cyan-400/20 shadow-[0_0_80px_rgba(6,182,212,0.08)] sm:top-28 sm:h-64 sm:w-64"
           />
           <motion.div
             animate={{ rotate: -360, scale: [1, 0.96, 1] }}
             transition={{ duration: 34, repeat: Infinity, ease: "linear" }}
-            className="absolute left-1/2 top-20 h-80 w-80 -translate-x-1/2 rounded-full border border-violet-400/10"
+            className="absolute left-1/2 top-16 h-72 w-72 -translate-x-1/2 rounded-full border border-violet-400/15 sm:top-20 sm:h-80 sm:w-80"
           />
           <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,0.35)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.35)_1px,transparent_1px)] [background-size:72px_72px]" />
           <motion.div
             animate={{ x: [0, -18, 0], y: [0, 14, 0], rotate: [12, 28, 12] }}
             transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute left-20 top-28 h-24 w-24 border border-violet-400/15"
+            className="absolute left-6 top-24 h-20 w-20 border border-violet-400/20 sm:left-20 sm:top-28 sm:h-24 sm:w-24"
           />
           <motion.div
             animate={{ x: [0, 16, 0], y: [0, -18, 0], rotate: [-12, -28, -12] }}
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute right-20 top-40 h-28 w-28 rounded-[28px] border border-cyan-400/15"
+            className="absolute right-6 top-36 h-24 w-24 rounded-[24px] border border-cyan-400/20 sm:right-20 sm:top-40 sm:h-28 sm:w-28 sm:rounded-[28px]"
           />
           <div className="absolute bottom-8 left-1/2 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent" />
         </motion.div>
@@ -102,18 +102,18 @@ export function AboutContent() {
           </div>
 
           <p className="text-muted leading-relaxed">
-            Halo! Saya{" "}
+            Hi! I&apos;m{" "}
             <span className="font-medium text-foreground">{siteConfig.shortName}</span>,
-            seorang fresh graduate dari{" "}
+            a fresh graduate from{" "}
             <span className="font-medium text-foreground">
               SMKN 2 Kota Bekasi
             </span>{" "}
-            jurusan Rekayasa Perangkat Lunak (RPL). Saya passionate dalam membangun
-            aplikasi web modern dengan code yang bersih dan user experience yang baik.
-            Tech stack utama saya meliputi{" "}
+            majoring in Software Engineering. I&apos;m passionate about building
+            modern web applications with clean code and thoughtful user experiences.
+            My main tech stack includes{" "}
             <span className="font-medium text-foreground">Laravel</span>,{" "}
             <span className="font-medium text-foreground">React</span>,{" "}
-            <span className="font-medium text-foreground">Next.js</span>, dan{" "}
+            <span className="font-medium text-foreground">Next.js</span>, and{" "}
             <span className="font-medium text-foreground">Java</span>.
           </p>
         </motion.div>

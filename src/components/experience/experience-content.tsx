@@ -10,7 +10,7 @@ export function ExperienceContent() {
   const { ref: timelineRef, y: timelineY } = useParallax(0.1);
 
   return (
-    <div className="px-6 py-24">
+    <div className="overflow-hidden px-5 py-20 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-3xl">
         <SectionHeading
           title="Experience"
@@ -43,7 +43,7 @@ export function ExperienceContent() {
 
                 {/* Content */}
                 <div
-                  className={`ml-12 w-full md:ml-0 md:w-[calc(50%-2rem)] ${
+                  className={`ml-12 w-[calc(100%-3rem)] text-left md:ml-0 md:w-[calc(50%-2rem)] ${
                     isLeft ? "md:text-right" : "md:text-left"
                   }`}
                 >
@@ -61,7 +61,7 @@ export function ExperienceContent() {
                     <h3 className="text-base font-semibold">{exp.title}</h3>
                     <p className="text-sm text-muted">{exp.organization}</p>
                     <p className="mt-1 text-xs text-muted/60">
-                      {exp.startDate} — {exp.endDate} &middot; {exp.location}
+                      {exp.startDate} - {exp.endDate} &middot; {exp.location}
                     </p>
                     <ul className={`mt-3 space-y-1 ${isLeft ? "md:text-right" : ""}`}>
                       {exp.description.map((desc, di) => (

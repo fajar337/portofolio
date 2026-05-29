@@ -16,9 +16,9 @@ export const projects: Project[] = [
     slug: "website-dufan",
     title: "Website Dufan",
     description:
-      "Website informasi Dunia Fantasi (Dufan) dengan fitur daftar wahana dan pembelian tiket.",
+      "An informational Dunia Fantasi (Dufan) website with attraction listings and ticket purchasing.",
     longDescription:
-      "Website lengkap untuk Dunia Fantasi theme park yang menampilkan informasi wahana, galeri foto, dan fitur pembelian tiket online. Dibangun dengan Laravel dan Blade templating engine, menggunakan MySQL sebagai database.",
+      "A complete website for the Dunia Fantasi theme park featuring attraction details, photo galleries, and online ticket purchasing. Built with Laravel, the Blade templating engine, and MySQL as the database.",
     tags: ["Laravel", "Blade", "PHP", "MySQL"],
     category: "web-app",
     githubUrl: "https://github.com/fajar337/Website-Dufan",
@@ -29,9 +29,9 @@ export const projects: Project[] = [
     slug: "amb-monitoring",
     title: "AMB Monitoring",
     description:
-      "Sistem monitoring AMB berbasis web untuk tracking dan manajemen data secara real-time.",
+      "A web-based AMB monitoring system for real-time tracking and data management.",
     longDescription:
-      "Aplikasi web monitoring yang digunakan untuk memantau dan mengelola data AMB secara real-time. Fitur meliputi dashboard statistik, pencatatan data, dan laporan. Dibangun menggunakan Laravel dengan antarmuka yang responsif.",
+      "A monitoring web application used to track and manage AMB data in real time. Features include a statistics dashboard, data entry, and reporting. Built with Laravel and a responsive interface.",
     tags: ["Laravel", "Blade", "PHP", "MySQL"],
     category: "web-app",
     githubUrl: "https://github.com/fajar337/amb-monitoring",
@@ -42,9 +42,9 @@ export const projects: Project[] = [
     slug: "marketplace",
     title: "Marketplace",
     description:
-      "Platform marketplace jual beli online dengan fitur manajemen produk dan transaksi.",
+      "An online marketplace platform with product and transaction management features.",
     longDescription:
-      "Aplikasi e-commerce marketplace yang memungkinkan pengguna untuk menjual dan membeli produk secara online. Fitur meliputi manajemen produk, keranjang belanja, proses checkout, dan manajemen order.",
+      "An e-commerce marketplace application that allows users to sell and buy products online. Features include product management, shopping cart, checkout flow, and order management.",
     tags: ["PHP", "Laravel"],
     category: "web-app",
     githubUrl: "https://github.com/fajar337/Marketplace",
@@ -55,9 +55,9 @@ export const projects: Project[] = [
     slug: "palugada",
     title: "PaluGada",
     description:
-      "Aplikasi web multi-purpose dengan berbagai fitur utility.",
+      "A multipurpose web application with several utility features.",
     longDescription:
-      "Aplikasi web serbaguna yang menyediakan berbagai fitur utility dalam satu platform. Dibangun dengan JavaScript vanilla, HTML, dan CSS tanpa framework tambahan.",
+      "A versatile web application that provides multiple utility features in one platform. Built with vanilla JavaScript, HTML, and CSS without additional frameworks.",
     tags: ["JavaScript", "HTML", "CSS"],
     category: "web-app",
     githubUrl: "https://github.com/fajar337/PaluGada",
@@ -66,11 +66,11 @@ export const projects: Project[] = [
   },
   {
     slug: "system-monitoring-parkir",
-    title: "System Monitoring Parkir",
+    title: "Parking Monitoring System",
     description:
-      "Sistem monitoring parkir untuk memantau kendaraan masuk/keluar dan ketersediaan slot.",
+      "A parking monitoring system for tracking vehicle entry, exit, and slot availability.",
     longDescription:
-      "Aplikasi desktop berbasis Java untuk monitoring area parkir. Fitur meliputi pencatatan kendaraan masuk dan keluar, monitoring ketersediaan slot parkir, serta pembuatan laporan harian dan bulanan.",
+      "A Java-based desktop application for monitoring parking areas. Features include recording vehicle entry and exit, tracking available parking slots, and generating daily and monthly reports.",
     tags: ["Java"],
     category: "desktop",
     githubUrl: "https://github.com/fajar337/SystemMonitoringParkir",
@@ -81,9 +81,9 @@ export const projects: Project[] = [
     slug: "daily-box",
     title: "Daily Box",
     description:
-      "Aplikasi manajemen tugas harian untuk mengatur aktivitas dan produktivitas.",
+      "A daily task management application for organizing activities and productivity.",
     longDescription:
-      "Aplikasi desktop untuk manajemen tugas dan aktivitas harian. Pengguna dapat menambah, mengedit, dan menghapus tugas, serta melacak progress penyelesaian tugas.",
+      "A desktop application for managing daily tasks and activities. Users can add, edit, and delete tasks while tracking completion progress.",
     tags: ["Java"],
     category: "desktop",
     githubUrl: "https://github.com/fajar337/Daily-Box",
@@ -92,11 +92,11 @@ export const projects: Project[] = [
   },
   {
     slug: "sistem-pemilihan-jurusan",
-    title: "Sistem Pemilihan Jurusan",
+    title: "Major Selection System",
     description:
-      "Sistem pendukung keputusan untuk membantu siswa memilih jurusan kuliah.",
+      "A decision-support system that helps students choose a college major.",
     longDescription:
-      "Aplikasi sistem pendukung keputusan (SPK) yang membantu siswa SMA/SMK dalam memilih jurusan kuliah yang sesuai dengan minat, bakat, dan kemampuan mereka. Menggunakan metode pengambilan keputusan terstruktur.",
+      "A decision-support application that helps high school and vocational students choose a college major based on their interests, strengths, and abilities using a structured decision-making method.",
     tags: ["Java"],
     category: "desktop",
     githubUrl: "https://github.com/fajar337/sistem-pemilihan-jurusan",
@@ -105,11 +105,11 @@ export const projects: Project[] = [
   },
   {
     slug: "master-barang",
-    title: "Master Barang",
+    title: "Item Master",
     description:
-      "Aplikasi pengelolaan master data barang untuk inventaris dan stok.",
+      "An item master data management application for inventory and stock records.",
     longDescription:
-      "Sistem pengelolaan master data barang yang digunakan untuk mencatat dan mengelola inventaris. Fitur meliputi CRUD data barang, pencarian, dan pengelompokan berdasarkan kategori.",
+      "An item master data management system used to record and manage inventory. Features include item CRUD, search, and category-based grouping.",
     tags: ["Java"],
     category: "desktop",
     githubUrl: "https://github.com/fajar337/master-barang",
@@ -120,9 +120,9 @@ export const projects: Project[] = [
     slug: "dufan",
     title: "Dufan",
     description:
-      "Versi alternatif aplikasi bertema Dunia Fantasi.",
+      "An alternative Dunia Fantasi-themed web application.",
     longDescription:
-      "Aplikasi web bertema Dunia Fantasi (Dufan) dengan pendekatan dan fitur yang berbeda dari versi Website Dufan. Dibangun sebagai project pengembangan skill Laravel.",
+      "A Dunia Fantasi (Dufan) themed web application with a different approach and feature set from the Website Dufan version. Built as a Laravel skill-development project.",
     tags: ["PHP", "Laravel"],
     category: "web-app",
     githubUrl: "https://github.com/fajar337/dufan",
@@ -133,9 +133,9 @@ export const projects: Project[] = [
     slug: "website-thr",
     title: "Website THR",
     description:
-      "Website interaktif bertema Tunjangan Hari Raya.",
+      "An interactive website themed around holiday allowance gifts.",
     longDescription:
-      "Website bertema Tunjangan Hari Raya (THR) dengan desain interaktif dan animasi. Dibangun menggunakan JavaScript, HTML, dan CSS.",
+      "A Tunjangan Hari Raya (THR) themed website with interactive design and animation. Built using JavaScript, HTML, and CSS.",
     tags: ["JavaScript", "HTML", "CSS"],
     category: "web-app",
     githubUrl: "https://github.com/fajar337/website-thr",

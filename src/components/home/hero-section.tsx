@@ -36,7 +36,7 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex min-h-[calc(100vh-4rem)] min-h-[calc(100svh-4rem)] items-center justify-center overflow-hidden px-6"
+      className="relative flex min-h-[calc(100svh-4rem)] items-center justify-center overflow-hidden px-5 py-10 sm:min-h-[calc(100vh-4rem)] sm:px-6 sm:py-0"
     >
       {/* 3D Scene - hidden on mobile */}
       <div className="hidden md:block">
@@ -94,7 +94,7 @@ export function HeroSection() {
         {/* Name */}
         <motion.h1
           variants={item}
-          className="text-5xl font-bold tracking-tight sm:text-7xl lg:text-8xl"
+          className="text-4xl font-bold tracking-tight sm:text-7xl lg:text-8xl"
         >
           Hi, I&apos;m{" "}
           <span className="gradient-text glow-text">{siteConfig.name}</span>
@@ -103,7 +103,7 @@ export function HeroSection() {
         {/* Tagline */}
         <motion.p
           variants={item}
-          className="mx-auto mt-6 max-w-xl text-lg text-muted sm:text-xl"
+          className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted sm:mt-6 sm:text-xl"
         >
           A{" "}
           <span className="text-foreground font-medium">Fresh Graduate</span>{" "}
@@ -118,7 +118,7 @@ export function HeroSection() {
         {/* CTAs */}
         <motion.div
           variants={item}
-          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+          className="mt-8 flex flex-wrap items-center justify-center gap-4 sm:mt-10"
         >
           <Link
             href="/projects"
