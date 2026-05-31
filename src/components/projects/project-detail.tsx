@@ -5,8 +5,14 @@ import Link from "next/link";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/ui/icons";
 import type { Project } from "@/data/projects";
+import { useLanguage } from "@/components/language/language-provider";
 
 export function ProjectDetail({ project }: { project: Project }) {
+  const { language, t } = useLanguage();
+  const title = language === "id" ? project.titleId ?? project.title : project.title;
+  const description =
+    language === "id" ? project.longDescriptionId : project.longDescription;
+
   return (
     <div className="px-6 py-24">
       <div className="mx-auto max-w-3xl">
@@ -20,7 +26,7 @@ export function ProjectDetail({ project }: { project: Project }) {
             className="mb-8 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to Projects
+            {t("common.backToProjects")}
           </Link>
 
           <div className="mb-4 flex items-center gap-3">
@@ -31,11 +37,11 @@ export function ProjectDetail({ project }: { project: Project }) {
           </div>
 
           <h1 className="mb-4 text-4xl font-bold tracking-tight">
-            {project.title}
+            {title}
           </h1>
 
           <p className="mb-8 text-lg text-muted leading-relaxed">
-            {project.longDescription}
+            {description}
           </p>
 
           <div className="mb-8 flex flex-wrap gap-2">
@@ -58,7 +64,7 @@ export function ProjectDetail({ project }: { project: Project }) {
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-white/[0.03] px-5 py-2.5 text-sm font-medium transition-colors hover:bg-white/[0.06]"
               >
                 <GithubIcon className="h-4 w-4" />
-                View Source
+                {t("common.viewSource")}
               </Link>
             )}
             {project.liveUrl && (
@@ -69,7 +75,7 @@ export function ProjectDetail({ project }: { project: Project }) {
                 className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] px-5 py-2.5 text-sm font-medium text-white transition-shadow hover:shadow-lg hover:shadow-purple-500/25"
               >
                 <ExternalLink className="h-4 w-4" />
-                Live Demo
+                {t("common.liveDemo")}
               </Link>
             )}
           </div>

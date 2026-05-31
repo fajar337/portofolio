@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Fajar Mustofa",
   shortName: "Fajar",
-  title: "Fajar Mustofa — Web Developer",
+  title: "Fajar Mustofa - Web Developer",
   description:
     "Portfolio website of Fajar Mustofa, a fresh graduate web developer from Bekasi specializing in Laravel, React, and modern web technologies.",
   url: "https://fajar.dev",
@@ -11,13 +11,13 @@ export const siteConfig = {
 };
 
 export const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
-  { href: "/github", label: "GitHub" },
-  { href: "/experience", label: "Experience" },
-  { href: "/blog", label: "Blog" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "Home", labelKey: "nav.home" },
+  { href: "/about", label: "About", labelKey: "nav.about" },
+  { href: "/projects", label: "Projects", labelKey: "nav.projects" },
+  { href: "/github", label: "GitHub", labelKey: "nav.github" },
+  { href: "/experience", label: "Experience", labelKey: "nav.experience" },
+  { href: "/blog", label: "Blog", labelKey: "nav.blog" },
+  { href: "/contact", label: "Contact", labelKey: "nav.contact" },
 ] as const;
 
 export const socialLinks = [

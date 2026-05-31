@@ -6,11 +6,12 @@ import { ArrowUpRight, Code2, Database, Palette, Smartphone } from "lucide-react
 import { GithubIcon } from "@/components/ui/icons";
 import { useParallax } from "@/hooks/use-parallax";
 import { siteConfig } from "@/lib/constants";
+import { useLanguage } from "@/components/language/language-provider";
 
 const bentoItems = [
   {
-    title: "Frontend Development",
-    description: "React, Next.js, Tailwind CSS — building fast, responsive UIs",
+    titleKey: "bento.frontendTitle",
+    descriptionKey: "bento.frontendDescription",
     icon: Palette,
     gradient: "from-violet-500/10 to-purple-600/10",
     border: "hover:border-violet-500/30",
@@ -18,8 +19,8 @@ const bentoItems = [
     direction: "left" as const,
   },
   {
-    title: "Backend Development",
-    description: "Laravel, PHP, REST APIs",
+    titleKey: "bento.backendTitle",
+    descriptionKey: "bento.backendDescription",
     icon: Database,
     gradient: "from-cyan-500/10 to-blue-500/10",
     border: "hover:border-cyan-500/30",
@@ -27,8 +28,8 @@ const bentoItems = [
     direction: "right" as const,
   },
   {
-    title: "Desktop Apps",
-    description: "Java applications",
+    titleKey: "bento.desktopTitle",
+    descriptionKey: "bento.desktopDescription",
     icon: Code2,
     gradient: "from-amber-500/10 to-orange-500/10",
     border: "hover:border-amber-500/30",
@@ -36,8 +37,8 @@ const bentoItems = [
     direction: "left" as const,
   },
   {
-    title: "Responsive Design",
-    description: "Mobile-first approach, pixel-perfect across all devices",
+    titleKey: "bento.responsiveTitle",
+    descriptionKey: "bento.responsiveDescription",
     icon: Smartphone,
     gradient: "from-pink-500/10 to-rose-500/10",
     border: "hover:border-pink-500/30",
@@ -48,13 +49,17 @@ const bentoItems = [
 
 function getInitial(direction: "left" | "right" | "bottom") {
   switch (direction) {
-    case "left": return { opacity: 0, x: -64, y: 44 };
-    case "right": return { opacity: 0, x: 64, y: -44 };
-    case "bottom": return { opacity: 0, y: 40 };
+    case "left":
+      return { opacity: 0, x: -64, y: 44 };
+    case "right":
+      return { opacity: 0, x: 64, y: -44 };
+    case "bottom":
+      return { opacity: 0, y: 40 };
   }
 }
 
 export function BentoSection() {
+  const { t } = useLanguage();
   const { ref, y } = useParallax(0.1);
 
   return (
@@ -69,7 +74,7 @@ export function BentoSection() {
             const Icon = item.icon;
             return (
               <motion.div
-                key={item.title}
+                key={item.titleKey}
                 initial={getInitial(item.direction)}
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
@@ -78,13 +83,12 @@ export function BentoSection() {
               >
                 <div className={`absolute inset-0 -z-10 bg-gradient-to-br ${item.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`} />
                 <Icon className="mb-3 h-6 w-6 text-muted transition-colors duration-300 group-hover:text-foreground" />
-                <h3 className="mb-1 text-base font-semibold">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-muted">{item.description}</p>
+                <h3 className="mb-1 text-base font-semibold">{t(item.titleKey)}</h3>
+                <p className="text-sm leading-relaxed text-muted">{t(item.descriptionKey)}</p>
               </motion.div>
             );
           })}
 
-          {/* GitHub CTA - slides up from bottom */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -101,9 +105,9 @@ export function BentoSection() {
                   <GithubIcon className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="text-base font-semibold">Check my GitHub</h3>
+                  <h3 className="text-base font-semibold">{t("home.githubCtaTitle")}</h3>
                   <p className="text-sm text-muted">
-                    @{siteConfig.githubUsername} — Real-time stats, contributions & activity
+                    @{siteConfig.githubUsername} - {t("home.githubCtaSubtitle")}
                   </p>
                 </div>
               </div>

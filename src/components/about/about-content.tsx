@@ -9,8 +9,10 @@ import { ParallaxDecoration } from "@/components/ui/parallax-decoration";
 import { FloatingDot } from "@/components/ui/floating-elements";
 import { skillCategories } from "@/data/skills";
 import { siteConfig } from "@/lib/constants";
+import { useLanguage } from "@/components/language/language-provider";
 
 export function AboutContent() {
+  const { language, t } = useLanguage();
   const { ref: bioRef, y: bioY } = useParallax(0.15);
   const { ref: skillsRef, y: skillsY } = useParallax(0.1);
   const { ref: backdropRef, y: backdropY } = useParallaxRange([90, -90]);
@@ -66,8 +68,8 @@ export function AboutContent() {
         </motion.div>
 
         <SectionHeading
-          title="About Me"
-          subtitle="Get to know who I am and what I do"
+          title={t("about.title")}
+          subtitle={t("about.subtitle")}
         />
 
         {/* Bio */}
@@ -102,18 +104,17 @@ export function AboutContent() {
           </div>
 
           <p className="text-muted leading-relaxed">
-            Hi! I&apos;m{" "}
+            {t("about.bioA")}{" "}
             <span className="font-medium text-foreground">{siteConfig.shortName}</span>,
-            a fresh graduate from{" "}
+            {" "}{t("about.bioB")}{" "}
             <span className="font-medium text-foreground">
               SMKN 2 Kota Bekasi
             </span>{" "}
-            majoring in Software Engineering. I&apos;m passionate about building
-            modern web applications with clean code and thoughtful user experiences.
-            My main tech stack includes{" "}
+            {t("about.bioC")}{" "}
             <span className="font-medium text-foreground">Laravel</span>,{" "}
             <span className="font-medium text-foreground">React</span>,{" "}
-            <span className="font-medium text-foreground">Next.js</span>, and{" "}
+            <span className="font-medium text-foreground">Next.js</span>,{" "}
+            {language === "id" ? "dan" : "and"}{" "}
             <span className="font-medium text-foreground">Java</span>.
           </p>
         </motion.div>

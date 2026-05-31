@@ -9,11 +9,13 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { ParallaxDecoration } from "@/components/ui/parallax-decoration";
 import { projects } from "@/data/projects";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/components/language/language-provider";
 
 const allTags = Array.from(new Set(projects.flatMap((p) => p.tags)));
 const filters = ["All", ...allTags];
 
 export function ProjectsContent() {
+  const { language, t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState("All");
 
   const filtered =
@@ -26,8 +28,8 @@ export function ProjectsContent() {
       <ParallaxDecoration />
       <div className="mx-auto max-w-7xl">
         <SectionHeading
-          title="Projects"
-          subtitle="A collection of things I've built"
+          title={t("projects.title")}
+          subtitle={t("projects.subtitle")}
         />
 
         {/* Filters */}
@@ -43,7 +45,7 @@ export function ProjectsContent() {
                   : "border-border text-muted hover:border-white/10 hover:text-foreground"
               )}
             >
-              {filter}
+              {filter === "All" ? t("projects.all") : filter}
               {activeFilter === filter && (
                 <motion.span
                   layoutId="filter-indicator"
@@ -60,7 +62,8 @@ export function ProjectsContent() {
           layout
           className="mb-6 text-center text-xs text-muted/60"
         >
-          Showing {filtered.length} project{filtered.length !== 1 ? "s" : ""}
+          {t("projects.showing")} {filtered.length}{" "}
+          {filtered.length === 1 ? t("projects.project") : t("projects.projects")}
         </motion.p>
 
         {/* Grid */}
@@ -87,10 +90,10 @@ export function ProjectsContent() {
                 </div>
 
                 <h3 className="mb-2 text-lg font-semibold transition-colors duration-300 group-hover:text-white">
-                  {project.title}
+                  {language === "id" ? project.titleId ?? project.title : project.title}
                 </h3>
                 <p className="mb-5 text-sm leading-relaxed text-muted line-clamp-2">
-                  {project.description}
+                  {language === "id" ? project.descriptionId : project.description}
                 </p>
 
                 <div className="mb-5 flex flex-wrap gap-2">
@@ -113,14 +116,14 @@ export function ProjectsContent() {
                       className="inline-flex items-center gap-1.5 text-xs text-muted transition-colors hover:text-foreground"
                     >
                       <GithubIcon className="h-3.5 w-3.5" />
-                      Source
+                      {t("common.source")}
                     </Link>
                   )}
                   <Link
                     href={`/projects/${project.slug}`}
                     className="inline-flex items-center gap-1 text-xs text-muted transition-colors hover:text-accent"
                   >
-                    Details
+                    {t("common.details")}
                     <ArrowUpRight className="h-3 w-3 transition-transform group-hover:-translate-y-px group-hover:translate-x-px" />
                   </Link>
                 </div>

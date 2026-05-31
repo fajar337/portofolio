@@ -8,6 +8,7 @@ import { FloatingBadge, FloatingDot } from "@/components/ui/floating-elements";
 import { CanvasWrapper } from "@/components/three/canvas-wrapper";
 import Link from "next/link";
 import { siteConfig } from "@/lib/constants";
+import { useLanguage } from "@/components/language/language-provider";
 
 const container = {
   hidden: { opacity: 0 },
@@ -23,6 +24,7 @@ const item = {
 };
 
 export function HeroSection() {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -111,7 +113,7 @@ export function HeroSection() {
         {/* Badge */}
         <motion.div variants={item} className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-white/[0.03] px-4 py-1.5 text-xs text-muted backdrop-blur-sm">
           <span className="inline-block h-2 w-2 rounded-full bg-emerald-400 animate-pulse-glow" />
-          Available for work
+          {t("home.available")}
         </motion.div>
 
         {/* Name */}
@@ -119,7 +121,7 @@ export function HeroSection() {
           variants={item}
           className="text-4xl font-bold tracking-tight sm:text-7xl lg:text-8xl"
         >
-          Hi, I&apos;m{" "}
+          {t("home.introPrefix")}{" "}
           <span className="gradient-text glow-text">{siteConfig.name}</span>
         </motion.h1>
 
@@ -128,11 +130,11 @@ export function HeroSection() {
           variants={item}
           className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted sm:mt-6 sm:text-xl"
         >
-          A{" "}
-          <span className="text-foreground font-medium">Fresh Graduate</span>{" "}
+          {t("home.taglineA")}{" "}
+          <span className="text-foreground font-medium">{t("home.freshGraduate")}</span>{" "}
           &amp;{" "}
-          <span className="text-foreground font-medium">Web Developer</span>{" "}
-          from Bekasi, building modern web apps with{" "}
+          <span className="text-foreground font-medium">{t("home.webDeveloper")}</span>{" "}
+          {t("home.taglineB")}{" "}
           <span className="text-foreground font-medium">Laravel</span>,{" "}
           <span className="text-foreground font-medium">React</span>, &amp;{" "}
           <span className="text-foreground font-medium">Next.js</span>.
@@ -148,7 +150,7 @@ export function HeroSection() {
             className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] px-6 py-3 text-sm font-medium text-white transition-shadow hover:shadow-lg hover:shadow-purple-500/25"
           >
             <FileText className="h-4 w-4" />
-            View Projects
+            {t("home.viewProjects")}
             <span className="absolute inset-0 -z-10 bg-gradient-to-r from-[var(--gradient-to)] to-[var(--gradient-from)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </Link>
           <Link
@@ -156,7 +158,7 @@ export function HeroSection() {
             className="inline-flex items-center gap-2 rounded-full border border-border bg-white/[0.03] px-6 py-3 text-sm font-medium text-foreground backdrop-blur-sm transition-colors hover:bg-white/[0.06]"
           >
             <GithubIcon className="h-4 w-4" />
-            GitHub Dashboard
+            {t("home.githubDashboard")}
           </Link>
         </motion.div>
       </motion.div>

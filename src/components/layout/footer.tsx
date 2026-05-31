@@ -5,6 +5,7 @@ import { Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/ui/icons";
 import { siteConfig, navLinks, socialLinks } from "@/lib/constants";
+import { useLanguage } from "@/components/language/language-provider";
 
 const iconMap = {
   github: GithubIcon,
@@ -14,6 +15,8 @@ const iconMap = {
 };
 
 export function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="border-t border-border">
       <div className="mx-auto max-w-7xl px-6 py-12">
@@ -24,14 +27,14 @@ export function Footer() {
               <span className="gradient-text">{siteConfig.shortName}</span>
             </Link>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">
-              Fresh Graduate &amp; Web Developer from Bekasi, building modern web apps.
+              {t("footer.description")}
             </p>
           </div>
 
           {/* Links */}
           <div>
             <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted">
-              Pages
+              {t("common.pages")}
             </h3>
             <ul className="space-y-2">
               {navLinks.slice(1).map((link) => (
@@ -40,7 +43,7 @@ export function Footer() {
                     href={link.href}
                     className="text-sm text-muted transition-colors hover:text-foreground"
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                   </Link>
                 </li>
               ))}
@@ -50,7 +53,7 @@ export function Footer() {
           {/* Social */}
           <div>
             <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted">
-              Connect
+              {t("common.connect")}
             </h3>
             <div className="flex gap-3">
               {socialLinks.map((link) => {
@@ -83,7 +86,7 @@ export function Footer() {
             &copy; {new Date().getFullYear()} {siteConfig.name}
           </p>
           <p className="text-xs text-muted/40">
-            Built with Next.js & Tailwind CSS
+            {t("footer.builtWith")}
           </p>
         </motion.div>
       </div>

@@ -9,6 +9,7 @@ import { ActivityFeed } from "./activity-feed";
 import { LanguageChart } from "./language-chart";
 import { StreakCounter } from "./streak-counter";
 import { siteConfig } from "@/lib/constants";
+import { useLanguage } from "@/components/language/language-provider";
 import type {
   GitHubStats,
   ContributionData,
@@ -24,11 +25,13 @@ interface Props {
 }
 
 function NoDataFallback() {
+  const { t } = useLanguage();
+
   return (
     <div className="px-6 py-24">
       <div className="mx-auto max-w-5xl text-center">
         <SectionHeading
-          title="GitHub Dashboard"
+          title={t("github.title")}
           subtitle={`@${siteConfig.githubUsername}`}
         />
         <motion.div
@@ -37,11 +40,11 @@ function NoDataFallback() {
           className="rounded-xl border border-border bg-card p-12"
         >
           <p className="text-muted">
-            GitHub data is currently unavailable. Please configure a{" "}
+            {t("github.unavailable")}{" "}
             <code className="rounded bg-white/[0.06] px-1.5 py-0.5 text-xs font-mono">
               GITHUB_TOKEN
             </code>{" "}
-            environment variable to enable the dashboard.
+            {t("github.unavailableSuffix")}
           </p>
         </motion.div>
       </div>
@@ -55,6 +58,8 @@ export function GitHubDashboardContent({
   events,
   languages,
 }: Props) {
+  const { t } = useLanguage();
+
   if (!stats) return <NoDataFallback />;
 
   return (
@@ -62,8 +67,8 @@ export function GitHubDashboardContent({
       <ParallaxDecoration />
       <div className="mx-auto max-w-6xl">
         <SectionHeading
-          title="GitHub Dashboard"
-          subtitle={`@${siteConfig.githubUsername} — Real-time stats & activity`}
+          title={t("github.title")}
+          subtitle={`@${siteConfig.githubUsername} - ${t("github.subtitle")}`}
         />
 
         <div className="space-y-8">

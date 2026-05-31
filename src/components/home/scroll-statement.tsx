@@ -2,8 +2,11 @@
 
 import { FloatingDot } from "@/components/ui/floating-elements";
 import { ScrollRevealText } from "@/components/ui/scroll-reveal-text";
+import { useLanguage } from "@/components/language/language-provider";
 
 export function ScrollStatement() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative px-6 py-32">
       {/* Floating dots for visual interest */}
@@ -12,7 +15,7 @@ export function ScrollStatement() {
       <FloatingDot position={{ top: "50%", right: "30%" }} color="rgba(236,72,153,0.3)" size={5} speed={0.5} />
 
       <ScrollRevealText
-        text="I turn ideas into clean, functional, and beautiful web experiences."
+        text={t("home.statement")}
         className="mx-auto max-w-4xl text-center"
       />
     </section>

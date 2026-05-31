@@ -5,10 +5,12 @@ import Link from "next/link";
 import { ArrowUpRight, Folder } from "lucide-react";
 import { useParallax } from "@/hooks/use-parallax";
 import { projects } from "@/data/projects";
+import { useLanguage } from "@/components/language/language-provider";
 
 const featured = projects.filter((p) => p.featured).slice(0, 3);
 
 export function FeaturedProjects() {
+  const { language, t } = useLanguage();
   const { ref: headingRef, y: headingY } = useParallax(0.2);
   const { ref: gridRef, y: gridY } = useParallax(0.1);
 
@@ -25,15 +27,15 @@ export function FeaturedProjects() {
         >
           <div>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              <span className="gradient-text">Featured Projects</span>
+              <span className="gradient-text">{t("home.featuredTitle")}</span>
             </h2>
-            <p className="mt-2 text-sm text-muted">Some of my recent work</p>
+            <p className="mt-2 text-sm text-muted">{t("home.featuredSubtitle")}</p>
           </div>
           <Link
             href="/projects"
             className="hidden items-center gap-1 text-sm text-muted transition-colors hover:text-foreground sm:flex"
           >
-            View all
+            {t("common.viewAll")}
             <ArrowUpRight className="h-4 w-4" />
           </Link>
         </motion.div>
@@ -62,10 +64,10 @@ export function FeaturedProjects() {
                   <ArrowUpRight className="h-4 w-4 text-muted transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
                 </div>
                 <h3 className="mb-2 text-lg font-semibold transition-colors duration-300 group-hover:text-white">
-                  {project.title}
+                  {language === "id" ? project.titleId ?? project.title : project.title}
                 </h3>
                 <p className="mb-5 text-sm leading-relaxed text-muted line-clamp-2">
-                  {project.description}
+                  {language === "id" ? project.descriptionId : project.description}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
@@ -92,7 +94,7 @@ export function FeaturedProjects() {
             href="/projects"
             className="inline-flex items-center gap-1 text-sm text-muted transition-colors hover:text-foreground"
           >
-            View all projects
+            {t("common.viewAllProjects")}
             <ArrowUpRight className="h-4 w-4" />
           </Link>
         </motion.div>

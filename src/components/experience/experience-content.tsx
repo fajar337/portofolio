@@ -5,16 +5,18 @@ import { Briefcase, GraduationCap } from "lucide-react";
 import { useParallax } from "@/hooks/use-parallax";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { experiences } from "@/data/experience";
+import { useLanguage } from "@/components/language/language-provider";
 
 export function ExperienceContent() {
+  const { language, t } = useLanguage();
   const { ref: timelineRef, y: timelineY } = useParallax(0.1);
 
   return (
     <div className="overflow-hidden px-5 py-20 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-3xl">
         <SectionHeading
-          title="Experience"
-          subtitle="My professional journey and education"
+          title={t("experience.title")}
+          subtitle={t("experience.subtitle")}
         />
 
         <motion.div ref={timelineRef} style={{ y: timelineY }} className="relative">
@@ -58,13 +60,15 @@ export function ExperienceContent() {
                         {exp.type}
                       </span>
                     </div>
-                    <h3 className="text-base font-semibold">{exp.title}</h3>
+                    <h3 className="text-base font-semibold">
+                      {language === "id" ? exp.titleId : exp.title}
+                    </h3>
                     <p className="text-sm text-muted">{exp.organization}</p>
                     <p className="mt-1 text-xs text-muted/60">
                       {exp.startDate} - {exp.endDate} &middot; {exp.location}
                     </p>
                     <ul className={`mt-3 space-y-1 ${isLeft ? "md:text-right" : ""}`}>
-                      {exp.description.map((desc, di) => (
+                      {(language === "id" ? exp.descriptionId : exp.description).map((desc, di) => (
                         <li key={di} className="text-sm text-muted">
                           {desc}
                         </li>

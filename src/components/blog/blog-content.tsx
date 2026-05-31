@@ -5,16 +5,25 @@ import Link from "next/link";
 import { Calendar, Clock, ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import type { BlogPostMeta } from "@/types/blog";
+import { useLanguage } from "@/components/language/language-provider";
 
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("en-US", {
+function formatDate(dateStr: string, locale: string) {
+  return new Date(dateStr).toLocaleDateString(locale, {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 }
 
-function PostCard({ post, index }: { post: BlogPostMeta; index: number }) {
+function PostCard({
+  post,
+  index,
+  locale,
+}: {
+  post: BlogPostMeta;
+  index: number;
+  locale: string;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -30,7 +39,7 @@ function PostCard({ post, index }: { post: BlogPostMeta; index: number }) {
         <div className="mb-3 flex items-center gap-3 text-xs text-muted">
           <span className="inline-flex items-center gap-1">
             <Calendar className="h-3 w-3" />
-            {formatDate(post.date)}
+            {formatDate(post.date, locale)}
           </span>
           <span className="inline-flex items-center gap-1">
             <Clock className="h-3 w-3" />
@@ -63,12 +72,15 @@ function PostCard({ post, index }: { post: BlogPostMeta; index: number }) {
 }
 
 export function BlogContent({ posts }: { posts: BlogPostMeta[] }) {
+  const { language, t } = useLanguage();
+  const locale = language === "id" ? "id-ID" : "en-US";
+
   return (
     <div className="px-6 py-24">
       <div className="mx-auto max-w-3xl">
         <SectionHeading
-          title="Blog"
-          subtitle="Thoughts on web development and tech"
+          title={t("blog.title")}
+          subtitle={t("blog.subtitle")}
         />
 
         {posts.length === 0 ? (
@@ -77,15 +89,15 @@ export function BlogContent({ posts }: { posts: BlogPostMeta[] }) {
             animate={{ opacity: 1, y: 0 }}
             className="flex flex-col items-center rounded-xl border border-border bg-card p-12 text-center"
           >
-            <h3 className="mb-2 text-lg font-medium">Coming Soon</h3>
+            <h3 className="mb-2 text-lg font-medium">{t("blog.comingSoon")}</h3>
             <p className="text-sm text-muted">
-              I&apos;m working on some articles. Stay tuned!
+              {t("blog.empty")}
             </p>
           </motion.div>
         ) : (
           <div className="space-y-6">
             {posts.map((post, i) => (
-              <PostCard key={post.slug} post={post} index={i} />
+              <PostCard key={post.slug} post={post} index={i} locale={locale} />
             ))}
           </div>
         )}
